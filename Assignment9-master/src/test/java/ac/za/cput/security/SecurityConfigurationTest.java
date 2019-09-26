@@ -49,12 +49,12 @@ public class SecurityConfigurationTest {
     @Test
     public void whenIncorrectCredentialsWillBe401() throws Exception {
 
-        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admins").getForEntity(baseURL + "/getall", String.class);
+        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").getForEntity(baseURL + "/getall", String.class);
 
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
 
-        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+       assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
 
     }
 
