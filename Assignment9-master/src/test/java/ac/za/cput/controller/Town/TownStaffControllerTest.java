@@ -1,7 +1,9 @@
 package ac.za.cput.controller.Town;
 
+import ac.za.cput.domain.Bellville.BellvilleStaff;
 import ac.za.cput.domain.Town.TownBranch;
 import ac.za.cput.domain.Town.TownStaff;
+import ac.za.cput.factory.Bellville.FactoryBellvilleStaff;
 import ac.za.cput.factory.Town.FactoryTownStaff;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,15 +33,18 @@ public class TownStaffControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         TownStaff bellStaff = FactoryTownStaff.getTownStaff();
-        ResponseEntity<TownStaff> postResponse = restTemplate.postForEntity(baseURL + "/create", bellStaff, TownStaff.class);
+        bellStaff.setTnStaffId("newId");
+
+        ResponseEntity<TownStaff> postResponse = restTemplate.postForEntity(baseURL + "/new", bellStaff, TownStaff.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -49,7 +54,7 @@ public class TownStaffControllerTest {
         TownStaff bellStaff = restTemplate.getForObject(baseURL + "/staff/" + id, TownStaff.class);
         assertNotNull(bellStaff);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

@@ -22,7 +22,7 @@ public class DeliveryControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/credLedger";
 
-    @Ignore
+
     public void testGetAccountantById() {
         Deliveries credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", Deliveries.class);
         System.out.println(credLedger.getDelivId());
@@ -30,19 +30,20 @@ public class DeliveryControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         Deliveries creditorsLedger = FactoryDeliveries.getDeliveries("Shoprite",100,
                 5);
 
+        creditorsLedger.setDelivId("newId");
 
+        ResponseEntity<Deliveries> postResponse = restTemplate.postForEntity(baseURL + "/new", creditorsLedger, Deliveries.class);
 
-        ResponseEntity<Deliveries> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, Deliveries.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -52,7 +53,7 @@ public class DeliveryControllerTest {
         Deliveries creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, Deliveries.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

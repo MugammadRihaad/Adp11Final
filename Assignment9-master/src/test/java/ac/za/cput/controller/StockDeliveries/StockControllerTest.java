@@ -24,7 +24,7 @@ public class StockControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/credLedger";
 
-    @Ignore
+
     public void testGetAccountantById() {
         Stock credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", Stock.class);
         System.out.println(credLedger.getStockId());
@@ -32,19 +32,21 @@ public class StockControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         Stock creditorsLedger = FactoryStock.getStock("appliances",
                 400,8);
 
 
+        creditorsLedger.setStockId("newId");
 
-        ResponseEntity<Stock> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, Stock.class);
+        ResponseEntity<Stock> postResponse = restTemplate.postForEntity(baseURL + "/new", creditorsLedger, Stock.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -54,7 +56,7 @@ public class StockControllerTest {
         Stock creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, Stock.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

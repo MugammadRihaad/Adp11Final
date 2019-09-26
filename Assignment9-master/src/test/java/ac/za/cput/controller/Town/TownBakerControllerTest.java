@@ -24,7 +24,7 @@ public class TownBakerControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/baker";
 
-    @Ignore
+
     public void testGetAccountantById() {
         TownBaker bellBaker = restTemplate.getForObject(baseURL + "/baker/1", TownBaker.class);
         System.out.println(bellBaker.getTnBakerId());
@@ -32,7 +32,6 @@ public class TownBakerControllerTest {
     }
 
 
-    @Ignore
 
     public void create() {
         TownBaker bellBaker = FactoryTownBaker.getTownBaker("Rihaad",5000
@@ -42,7 +41,7 @@ public class TownBakerControllerTest {
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -52,7 +51,7 @@ public class TownBakerControllerTest {
         TownBaker bellAccounts = restTemplate.getForObject(baseURL + "/baker/" + id, TownBaker.class);
         assertNotNull(bellAccounts);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

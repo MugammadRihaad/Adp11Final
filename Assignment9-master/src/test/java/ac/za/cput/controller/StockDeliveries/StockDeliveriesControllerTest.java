@@ -23,7 +23,7 @@ public class StockDeliveriesControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/credLedger";
 
-    @Ignore
+
     public void testGetAccountantById() {
         StockDeliveries credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", StockDeliveries.class);
         System.out.println(credLedger.getDelId());
@@ -31,18 +31,20 @@ public class StockDeliveriesControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         StockDeliveries creditorsLedger =  FactoryStockDeliveries.getStockDeliveries("w35df","26dtgs");
 
 
+        creditorsLedger.setStockdelId("newId");
 
-        ResponseEntity<StockDeliveries> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, StockDeliveries.class);
+        ResponseEntity<StockDeliveries> postResponse = restTemplate.postForEntity(baseURL + "/new", creditorsLedger, StockDeliveries.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -52,7 +54,7 @@ public class StockDeliveriesControllerTest {
         StockDeliveries creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, StockDeliveries.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

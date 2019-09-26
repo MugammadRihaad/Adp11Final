@@ -24,7 +24,7 @@ public class CreditorsLedgerControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/credLedger";
 
-    @Ignore
+
     public void testGetAccountantById() {
         CreditorsLedger credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", CreditorsLedger.class);
         System.out.println(credLedger.getCreditorsLId());
@@ -32,18 +32,18 @@ public class CreditorsLedgerControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
-        CreditorsLedger creditorsLedger =  FactoryCreditorsLedger.getCreditorsLedger("Makro",2300);
+        CreditorsLedger baker = FactoryCreditorsLedger.getCreditorsLedger("Makro",20);
+        baker.setCreditorsLId("newId");
 
+        ResponseEntity<CreditorsLedger> postResponse = restTemplate.postForEntity(baseURL + "/new", baker, CreditorsLedger.class);
 
-
-        ResponseEntity<CreditorsLedger> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, CreditorsLedger.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -53,7 +53,7 @@ public class CreditorsLedgerControllerTest {
         CreditorsLedger creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, CreditorsLedger.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

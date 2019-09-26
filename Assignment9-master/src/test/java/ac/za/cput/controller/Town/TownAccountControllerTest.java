@@ -20,7 +20,7 @@ public class TownAccountControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/accountant";
 
-    @Ignore
+
     public void testGetAccountantById() {
         TownAccountant bellAccount = restTemplate.getForObject(baseURL + "/accountant/1", TownAccountant.class);
         System.out.println(bellAccount.getTnAccountId());
@@ -28,16 +28,19 @@ public class TownAccountControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         TownAccountant bellAccount = FactoryTownAccountant.getTownAccountant();
 
-        ResponseEntity<TownAccountant> postResponse = restTemplate.postForEntity(baseURL + "/create", bellAccount, TownAccountant.class);
+        bellAccount.setTnAccountId("newId");
+
+        ResponseEntity<TownAccountant> postResponse = restTemplate.postForEntity(baseURL + "/new", bellAccount, TownAccountant.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -47,7 +50,7 @@ public class TownAccountControllerTest {
         TownAccountant bellAccounts = restTemplate.getForObject(baseURL + "/accountant/" + id, TownAccountant.class);
         assertNotNull(bellAccounts);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

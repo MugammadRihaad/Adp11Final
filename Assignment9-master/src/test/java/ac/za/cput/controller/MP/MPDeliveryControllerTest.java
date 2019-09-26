@@ -24,7 +24,7 @@ public class MPDeliveryControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/delivery";
 
-    @Ignore
+
     public void testGetAccountantById() {
         MPDelivery bellDeliv = restTemplate.getForObject(baseURL + "/delivery/1", MPDelivery.class);
         System.out.println(bellDeliv.getMpDeliveId());
@@ -32,15 +32,18 @@ public class MPDeliveryControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         MPDelivery bellDeliv = FactoryMPDelivery.getMPDelivery();
-        ResponseEntity<MPDelivery> postResponse = restTemplate.postForEntity(baseURL + "/create", bellDeliv, MPDelivery.class);
+        bellDeliv.setMpDeliveId("newId");
+
+        ResponseEntity<MPDelivery> postResponse = restTemplate.postForEntity(baseURL + "/new", bellDeliv, MPDelivery.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -50,7 +53,7 @@ public class MPDeliveryControllerTest {
         MPDelivery bellBranch = restTemplate.getForObject(baseURL + "/delivery/" + id, MPDelivery.class);
         assertNotNull(bellBranch);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

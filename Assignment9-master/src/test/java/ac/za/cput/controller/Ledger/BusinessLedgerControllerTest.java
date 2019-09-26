@@ -1,6 +1,7 @@
 package ac.za.cput.controller.Ledger;
 
 import ac.za.cput.domain.Ledger.BusinessLedger;
+import ac.za.cput.factory.Bellville.FactoryBellvilleStaff;
 import ac.za.cput.factory.Ledger.FactoryBusinessLedger;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,17 +32,18 @@ public class BusinessLedgerControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
-        BusinessLedger busLedger =  FactoryBusinessLedger.getBusinessLedger("Rihaad",200);
+        BusinessLedger baker = FactoryBusinessLedger.getBusinessLedger("Rihaad",2000);
+        baker.setBusinessLId("newId");
 
+        ResponseEntity<BusinessLedger> postResponse = restTemplate.postForEntity(baseURL + "/new", baker, BusinessLedger.class);
 
-    ResponseEntity<BusinessLedger> postResponse = restTemplate.postForEntity(baseURL + "/create", busLedger, BusinessLedger.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -51,7 +53,7 @@ public class BusinessLedgerControllerTest {
         BusinessLedger cakes = restTemplate.getForObject(baseURL + "/busLedger/" + id, BusinessLedger.class);
         assertNotNull(cakes);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

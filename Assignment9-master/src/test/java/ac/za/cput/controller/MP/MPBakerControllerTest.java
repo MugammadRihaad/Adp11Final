@@ -23,7 +23,7 @@ public class MPBakerControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/baker";
 
-    @Ignore
+
     public void testGetAccountantById() {
         MPBaker bellBaker = restTemplate.getForObject(baseURL + "/baker/1", MPBaker.class);
         System.out.println(bellBaker.getMpBakerId());
@@ -31,16 +31,19 @@ public class MPBakerControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         MPBaker bellBaker = FactoryMPBaker.getMPBaker("Rihaad",5000);
 
-        ResponseEntity<MPBaker> postResponse = restTemplate.postForEntity(baseURL + "/create", bellBaker, MPBaker.class);
+        bellBaker.setMpBakerId("newId");
+
+        ResponseEntity<MPBaker> postResponse = restTemplate.postForEntity(baseURL + "/new", bellBaker, MPBaker.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -50,7 +53,7 @@ public class MPBakerControllerTest {
         MPBaker bellAccounts = restTemplate.getForObject(baseURL + "/baker/" + id, MPBaker.class);
         assertNotNull(bellAccounts);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

@@ -24,7 +24,7 @@ public class BellvilleStaffControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/staff";
 
-    @Ignore
+
     public void testGetAccountantById() {
         BellvilleStaff bellStaff = restTemplate.getForObject(baseURL + "/staff/1", BellvilleStaff.class);
         System.out.println(bellStaff.getBellStaffId());
@@ -32,15 +32,18 @@ public class BellvilleStaffControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
-        BellvilleStaff bellStaff = FactoryBellvilleStaff.getBellvilleStaff();
-        ResponseEntity<BellvilleStaff> postResponse = restTemplate.postForEntity(baseURL + "/create", bellStaff, BellvilleStaff.class);
+        BellvilleStaff staff = FactoryBellvilleStaff.getBellvilleStaff();
+        staff.setBellStaffId("newId");
+
+        ResponseEntity<BellvilleStaff> postResponse = restTemplate.postForEntity(baseURL + "/new", staff, BellvilleStaff.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -50,7 +53,7 @@ public class BellvilleStaffControllerTest {
         BellvilleStaff bellStaff = restTemplate.getForObject(baseURL + "/staff/" + id, BellvilleStaff.class);
         assertNotNull(bellStaff);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

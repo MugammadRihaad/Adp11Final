@@ -21,7 +21,7 @@ public class MPAccountControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/accountant";
 
-    @Ignore
+
     public void testGetAccountantById() {
         MPAccountant bellAccount = restTemplate.getForObject(baseURL + "/accountant/1", MPAccountant.class);
         System.out.println(bellAccount.getMpAccountId());
@@ -29,16 +29,19 @@ public class MPAccountControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         MPAccountant bellAccount = FactoryMPAccountant.getMPAccountant();
 
-        ResponseEntity<MPAccountant> postResponse = restTemplate.postForEntity(baseURL + "/create", bellAccount, MPAccountant.class);
+        bellAccount.setMpAccountId("newId");
+
+        ResponseEntity<MPAccountant> postResponse = restTemplate.postForEntity(baseURL + "/new", bellAccount, MPAccountant.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -48,7 +51,7 @@ public class MPAccountControllerTest {
         MPAccountant bellAccounts = restTemplate.getForObject(baseURL + "/accountant/" + id, MPAccountant.class);
         assertNotNull(bellAccounts);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

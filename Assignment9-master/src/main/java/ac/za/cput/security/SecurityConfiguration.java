@@ -18,15 +18,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 
-        auth
-                .inMemoryAuthentication()
-                .withUser("user")
-                .password(encoder().encode("password"))
-                .roles(USER_ROLE)
-                .and()
+        auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password(encoder().encode("admin"))
-                .roles(USER_ROLE, ADMIN_ROLE);
+                .roles(ADMIN_ROLE)
+                .and()
+                .withUser("user")
+                .password(encoder().encode("user"))
+                .roles(USER_ROLE);
 
     }
 
@@ -36,12 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/**/create/**").hasRole(ADMIN_ROLE)
-                .antMatchers(HttpMethod.PUT, "/**/update/**").hasRole(ADMIN_ROLE)
-                .antMatchers(HttpMethod.GET,"/**").hasAnyRole(USER_ROLE,ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/admin/getall")
+                .hasRole(ADMIN_ROLE)
                 .and()
-                .csrf().disable()
-                .formLogin().disable();
+                .csrf().disable();
 
     }
 

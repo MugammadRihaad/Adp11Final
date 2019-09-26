@@ -61,7 +61,7 @@ public class StockRepositoryImplTest {
 
         Stock updatedVersion = stockRepository.read(stock.getStockId());
 
-        assertNull(updatedVersion);
+        assertNotNull(updatedVersion);
     }
 
     @Test

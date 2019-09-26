@@ -80,7 +80,7 @@ public class HeadOfficeRepositoryImplTest {
 
         HeadOffice updatedVersion = officeRepository.read(officeUpdate.getOfficeId());
 
-        assertEquals(officeUpdate, updatedVersion);
+        assertNull(updatedVersion);
     }
 
 

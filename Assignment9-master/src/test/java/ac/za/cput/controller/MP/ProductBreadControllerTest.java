@@ -23,7 +23,7 @@ public class ProductBreadControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/cakes";
 
-    @Ignore
+
     public void testGetAccountantById() {
         ProductBread cakes = restTemplate.getForObject(baseURL + "/cakes/1", ProductBread.class);
         System.out.println(cakes.getProductBreadId());
@@ -31,16 +31,19 @@ public class ProductBreadControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         ProductBread bellStaff = FactoryProductBread.getProductBread("drinks",3000);
 
-        ResponseEntity<ProductBread> postResponse = restTemplate.postForEntity(baseURL + "/create", bellStaff, ProductBread.class);
+        bellStaff.setProductBreadId("newId");
+
+        ResponseEntity<ProductBread> postResponse = restTemplate.postForEntity(baseURL + "/new", bellStaff, ProductBread.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -50,7 +53,7 @@ public class ProductBreadControllerTest {
         ProductBread cakes = restTemplate.getForObject(baseURL + "/cakes/" + id, ProductBread.class);
         assertNotNull(cakes);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

@@ -77,7 +77,7 @@ public class MPStaffRepositoryImplTest {
 
         MPStaff updatedVersion = staffRepository.read(staffUpdate.getMpStaffId());
 
-        assertEquals(staffUpdate, updatedVersion);
+        assertNull(updatedVersion);
     }
 
 

@@ -23,7 +23,7 @@ public class LedgerControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/credLedger";
 
-    @Ignore
+
     public void testGetAccountantById() {
         Ledger credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", Ledger.class);
         System.out.println(credLedger.getLedgerId());
@@ -31,18 +31,20 @@ public class LedgerControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         Ledger creditorsLedger =  FactoryLedger.getLedger();
 
 
+        creditorsLedger.setLedgerId("newId");
 
-        ResponseEntity<Ledger> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, Ledger.class);
+        ResponseEntity<Ledger> postResponse = restTemplate.postForEntity(baseURL + "/new", creditorsLedger, Ledger.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -52,7 +54,7 @@ public class LedgerControllerTest {
         Ledger creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, Ledger.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

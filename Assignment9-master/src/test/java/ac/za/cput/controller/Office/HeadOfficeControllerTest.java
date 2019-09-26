@@ -22,7 +22,7 @@ public class HeadOfficeControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/office";
 
-    @Ignore
+
     public void testGetAccountantById() {
         HeadOffice credLedger = restTemplate.getForObject(baseURL + "/credLedger/1", HeadOffice.class);
         System.out.println(credLedger.getOfficeId());
@@ -30,18 +30,21 @@ public class HeadOfficeControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
         HeadOffice creditorsLedger =  FactoryHeadOffice.getHeadOffice();
 
 
 
-        ResponseEntity<HeadOffice> postResponse = restTemplate.postForEntity(baseURL + "/create", creditorsLedger, HeadOffice.class);
+        creditorsLedger.setOfficeId("newId");
+
+        ResponseEntity<HeadOffice> postResponse = restTemplate.postForEntity(baseURL + "/new", creditorsLedger, HeadOffice.class);
+
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -51,7 +54,7 @@ public class HeadOfficeControllerTest {
         HeadOffice creditorsLedger1 = restTemplate.getForObject(baseURL + "/credLedger/" + id, HeadOffice.class);
         assertNotNull(creditorsLedger);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;

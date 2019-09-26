@@ -25,7 +25,7 @@ public class ProductCakesControllerTest {
     private TestRestTemplate restTemplate;
     private String baseURL="http://localhost:8080/cakes";
 
-    @Ignore
+
     public void testGetAccountantById() {
         ProductCakes cakes = restTemplate.getForObject(baseURL + "/cakes/1", ProductCakes.class);
         System.out.println(cakes.getProductCakeId());
@@ -33,17 +33,19 @@ public class ProductCakesControllerTest {
     }
 
 
-    @Ignore
+
     @Test
     public void create() {
-        ResponseEntity result = restTemplate.withBasicAuth("admin", "admin")
-                .postForEntity(baseURL + "/create/cake", null, String.class);
-        System.out.println(result.getBody());
-        assertEquals(HttpStatus.OK, result.getStatusCode());
+        ProductCakes cake = FactoryProductCakes.getProductCakes("Chocolate",200);
+        cake.setProductCakeId("newId");
 
+        ResponseEntity<ProductCakes> postResponse = restTemplate.postForEntity(baseURL + "/new", cake, ProductCakes.class);
+
+        assertNotNull(postResponse);
+        assertNotNull(postResponse.getBody());
 
     }
-    @Ignore
+
     @Test
     public void update() {
         int id = 1;
@@ -53,7 +55,7 @@ public class ProductCakesControllerTest {
         ProductCakes cakes = restTemplate.getForObject(baseURL + "/cakes/" + id, ProductCakes.class);
         assertNotNull(cakes);
     }
-    @Ignore
+
     @Test
     public void delete() {
         int id = 2;
