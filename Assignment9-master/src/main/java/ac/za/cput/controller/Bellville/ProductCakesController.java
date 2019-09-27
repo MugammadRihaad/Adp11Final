@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/bellcakes")
+@RequestMapping("/administrator")
 public class ProductCakesController {
     @Autowired
     @Qualifier("ProductCakesServiceImpl")
@@ -43,7 +43,7 @@ public class ProductCakesController {
         service.delete(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getall")
     public Set<ProductCakes> getAll(){
         return service.getAll();
     }

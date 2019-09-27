@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class SecurityConfigurationTest {
     @Autowired
     private TestRestTemplate restTemplate;
-    private String baseURL = "http://localhost:8080/admin";
+    private String baseURL = "http://localhost:8080/administrator";
 
     @Autowired
 
@@ -49,7 +49,7 @@ public class SecurityConfigurationTest {
     @Test
     public void whenIncorrectCredentialsWillBe401() throws Exception {
 
-        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").getForEntity(baseURL + "/getall", String.class);
+        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admins").getForEntity(baseURL + "/getall", String.class);
 
         System.out.println(response.getStatusCode());
         System.out.println(response.getBody());
